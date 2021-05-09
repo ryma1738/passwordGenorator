@@ -1,5 +1,12 @@
 // Assignment code here
-//ok
+var lowerCase = false;
+var upperCase = false;
+var specialChar = false;
+var includeNum = false;
+
+function generatePassword(){
+  
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
