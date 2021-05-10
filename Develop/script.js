@@ -1,4 +1,4 @@
-// Assignment code here
+// Password Generation JAVASCRIPT
 var canceled = false;
 var lowerCase = false;
 var upperCase = false;
@@ -11,11 +11,12 @@ var characters = {
   oneThroughNine: "0123456789"
 }
 
-function generatePassword(){
+function generatePassword() {
+  //Gets all the inputs for generating the password
   canceled = false;
   while (true) {
     var length = window.prompt("Please enter the length of your password which can be between 8 - 128 characters long.");
-    if (length == null){
+    if (length == null) { //if the player hits cancel, it exits and does not change current text desplayed.
       canceled = true;
       break;
     }
@@ -39,22 +40,26 @@ function generatePassword(){
 }
 
 function passwordCreator(length) {
+  //Generates a password passed on responses from generatePassword
   var password = [];
   var indexOf = 0;
   var passwordIndex = 0;
+
   while (length > 0){
-    var index = randomBettween(4, 1) ;
+    var index = randomBettween(4, 1) ; //desides wheather to add a lowerCase, Upper, special or number
+
     if (index === 1) {
-      if (lowerCase) {
-        indexOf = randomBettween(26, 0);
-        password[passwordIndex] = characters.lower[indexOf];
-        passwordIndex ++;
-        length --; 
+      if (lowerCase) {                                      //will only add if lowerCase was selected as an option
+        indexOf = randomBettween(26, 0);                    //picks a random letter from characters.lower string
+        password[passwordIndex] = characters.lower[indexOf];// adds new lower case letter to password array
+        passwordIndex ++;                                   //Makes sure the next character will not replace the last one.
+        length --;                                          // if it was selected will minus 1 from length 
       }
-      else {
+      else { // if lower case was not selected will do nothing. This isn't needed but looks nice
         continue;
       }
     }
+    // Comments above apply to following else if's
     else if (index === 2) {
       if (upperCase) {
         indexOf = randomBettween(26, 0);
@@ -66,6 +71,7 @@ function passwordCreator(length) {
         continue;
       }
     }
+
     else if (index === 3) {
       if (specialChar) {
         indexOf = randomBettween(32, 0);
@@ -77,6 +83,7 @@ function passwordCreator(length) {
         continue;
       }
     }
+
     else if (index === 4) {
       if (includeNum) {
         indexOf = randomBettween(10, 0);
@@ -89,7 +96,8 @@ function passwordCreator(length) {
       }
     }
   }
-  password = password.join("");
+
+  password = password.join(""); //Makes the password array in to a single string
   return password;
 }
 
@@ -104,7 +112,8 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  if (!canceled){
+
+  if (!canceled) { //If the user selects cancel when prompted for a length it will leave the text currently being displayed
   passwordText.value = password;
   }
 }
